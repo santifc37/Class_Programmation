@@ -68,7 +68,7 @@ namespace Class_Programmation.Repository
 
         public async Task<bool> updateCategoryAsync(Category category)
         {
-            category.UpdatedDate= DateTime.UtcNow;
+            category.ModifiedDate = DateTime.UtcNow;
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
             return true;
