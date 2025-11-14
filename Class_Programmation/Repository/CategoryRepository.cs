@@ -25,7 +25,11 @@ namespace Class_Programmation.Repository
 
         public async Task<bool> CategoryExistByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var categoryExists = await _context.Categories
+                .AsNoTracking()
+                .AnyAsync(c => c.name == name);
+
+            return categoryExists;
         }
 
         public async Task<bool> CreateCategoryAsync(Category category)

@@ -13,7 +13,7 @@ namespace Class_Programmation.Services.IServices
 
         Task<bool> CategoryExistByNameAsync(string name);
 
-        Task<bool> CreateCategoryAsync(Category category);
+        Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryCreateDto);
 
         Task<bool> updateCategoryAsync(Category category);
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Class_Programmation.DAL.Models;
 using Class_Programmation.DAL.Models.Dtos;
+using Class_Programmation.Repository;
 using Class_Programmation.Repository.iRepository;
 using Class_Programmation.Services.IServices;
 
@@ -16,14 +17,34 @@ namespace Class_Programmation.Services
             _mapper = mapper;
         }
 
-        public Task<bool> CategoryExistByidAsync(int id)
+        public async Task<bool> CategoryExistByidAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> CategoryExistByNameAsync(string name)
+        public async Task<bool> CategoryExistByNameAsync(string name)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryCreateDto)
+        {
+            var categoryExist = await _categoryRepository.CategoryExistByNameAsync(categoryCreateDto.name);
+
+            if (categoryExist) {
+                throw new InvalidOperationException($"Ya existe una categoria  con el nombre '{categoryCreateDto.name}'");
+            }
+
+            var category= _mapper.Map<Category>(categoryCreateDto); 
+
+            var  categoryCreated=await _categoryRepository.CreateCategoryAsync(category);
+
+            if (!categoryCreated) {
+                throw new InvalidOperationException("Ocurrió un error al crear");
+            }
+
+            var categoryDto=_mapper.Map<CategoryDto>(category);
+            return categoryDto;
         }
 
         public Task<bool> CreateCategoryAsync(Category category)
@@ -31,7 +52,7 @@ namespace Class_Programmation.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteCategoryAsync(int id)
+        public async Task<bool> DeleteCategoryAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -43,12 +64,13 @@ namespace Class_Programmation.Services
             return categories;
         }
 
-        public Task<Category> GetCategoriesAsync(int id)
+        public async Task<Category> GetCategoriesAsync(int id)
         {
             throw new NotImplementedException();
+          
         }
 
-        public Task<bool> updateCategoryAsync(Category category)
+        public async Task<bool> updateCategoryAsync(Category category)
         {
             throw new NotImplementedException();
         }
@@ -61,6 +83,11 @@ namespace Class_Programmation.Services
         Task<CategoryDto> ICategoryService.GetCategoriesAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<CategoryDto> GetCategoryAsync(int id) {
+            var category = await _categoryRepository.GetCategoriesAsync(id);
+            return _mapper.Map<CategoryDto>(category);
         }
     }
 }
