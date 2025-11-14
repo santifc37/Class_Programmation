@@ -45,7 +45,7 @@ namespace Class_Programmation.Repository
 
         public async Task<bool> DeleteCategoryAsync(int id)
         {
-            var category = await GetCategoriesAsync(id);
+            var category = await GetCategoryAsync(id);
 
             if (category == null)
             {
@@ -58,13 +58,15 @@ namespace Class_Programmation.Repository
 
         public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            var categories= await _context.Categories.AsNoTracking()
+            var categories = await _context.Categories
+                .AsNoTracking()
+                .OrderBy(c => c.name)
                 .ToListAsync();
 
             return categories;
         }
 
-        public async Task<Category> GetCategoriesAsync(int id)
+        public async Task<Category> GetCategoryAsync(int id)
         {
             var category = await _context.Categories.AsNoTracking().FirstOrDefaultAsync(c => c.id == id);
             return category;

@@ -7,7 +7,7 @@ namespace Class_Programmation.Services.IServices
     {
 
         Task<ICollection<CategoryDto>> GetCategoriesAsync();//me retorna una lista de categoria
-        Task<CategoryDto> GetCategoriesAsync(int id);//me retorna una categoria por su id
+        Task<CategoryDto> GetCategoryAsync(int id);//me retorna una categoria por su id
 
         Task<bool> CategoryExistByidAsync(int id);
 

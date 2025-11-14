@@ -4,6 +4,7 @@ using Class_Programmation.DAL.Models.Dtos;
 using Class_Programmation.Repository;
 using Class_Programmation.Repository.iRepository;
 using Class_Programmation.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Class_Programmation.Services
 {
@@ -47,46 +48,30 @@ namespace Class_Programmation.Services
             return categoryDto;
         }
 
-        public Task<bool> CreateCategoryAsync(Category category)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<bool> DeleteCategoryAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ICollection<Category>> GetCategoriesAsync()
-        {
-            var categories = await _categoryRepository.GetCategoriesAsync();
-            var categoesDto=_mapper.Map<ICollection<CategoryDto>>(categories);
-            return categories;
-        }
+       
 
-        public async Task<Category> GetCategoriesAsync(int id)
-        {
-            throw new NotImplementedException();
-          
-        }
 
+        public async Task<ICollection<CategoryDto>> GetCategoriesAsync()
+        {
+            var categories = await _categoryRepository.GetCategoriesAsync(); //Solo estoy llamando el método desde la capa de Repository
+
+            return _mapper.Map<ICollection<CategoryDto>>(categories); //Mapeo la lista de categorías a una lista de categorías DTO
+        }
         public async Task<bool> updateCategoryAsync(Category category)
         {
             throw new NotImplementedException();
         }
 
-        Task<ICollection<CategoryDto>> ICategoryService.GetCategoriesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<CategoryDto> ICategoryService.GetCategoriesAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<CategoryDto> GetCategoryAsync(int id) {
-            var category = await _categoryRepository.GetCategoriesAsync(id);
+            var category = await _categoryRepository.GetCategoryAsync(id);
             return _mapper.Map<CategoryDto>(category);
         }
     }

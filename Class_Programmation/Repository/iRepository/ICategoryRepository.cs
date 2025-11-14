@@ -5,7 +5,7 @@ namespace Class_Programmation.Repository.iRepository
     public interface ICategoryRepository
     {
         Task<ICollection<Category>>GetCategoriesAsync();//me retorna una lista de categoria
-        Task<Category> GetCategoriesAsync(int id);//me retorna una categoria por su id
+        Task<Category> GetCategoryAsync(int id);//me retorna una categoria por su id
 
         Task<bool> CategoryExistByidAsync(int id);
 

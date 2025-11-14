@@ -36,7 +36,7 @@ namespace Class_Programmation.Controllers
         
         public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
         {
-           var category= await _categoryService.GetCategoriesAsync(id);
+           var category= await _categoryService.GetCategoryAsync(id);
 
           return Ok(category);
         }
