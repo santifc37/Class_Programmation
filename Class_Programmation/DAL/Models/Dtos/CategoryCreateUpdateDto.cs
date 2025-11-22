@@ -2,7 +2,7 @@
 
 namespace Class_Programmation.DAL.Models.Dtos
 {
-    public class CategoryCreateDto
+    public class CategoryCreateUpdateDto
     {
         [Required(ErrorMessage ="El nombre de la categoria es obligatorio")]
         public string name { get; set; }

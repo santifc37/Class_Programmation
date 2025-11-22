@@ -13,9 +13,9 @@ namespace Class_Programmation.Services.IServices
 
         Task<bool> CategoryExistByNameAsync(string name);
 
-        Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryCreateDto);
+        Task<CategoryDto> CreateCategoryAsync(CategoryCreateUpdateDto categoryCreateDto);
 
-        Task<bool> updateCategoryAsync(Category category);
+        Task<CategoryDto> updateCategoryAsync(CategoryCreateUpdateDto dto, int id);
 
         Task<bool> DeleteCategoryAsync(int id);
     }
